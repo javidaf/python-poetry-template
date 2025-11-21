@@ -1,7 +1,4 @@
-from . import __version__, __author__, __email__
-from .logging_config import get_logger
-
-logger = get_logger(__name__)
+from . import __version__, __author__, __email__, logger
 
 if __name__ == "__main__":
     logger.info(f"Package Template v{__version__} initialized")

@@ -97,8 +97,17 @@ def configure_project_logging(
         >>> logger.info("This is an info message")
     """
     # Convert string levels to logging constants
-    numeric_level = getattr(logging, level.upper(), logging.INFO)
-    numeric_file_level = getattr(logging, file_level.upper(), logging.DEBUG)
+    valid_levels = {'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'}
+    level_upper = level.upper()
+    file_level_upper = file_level.upper()
+    
+    if level_upper not in valid_levels:
+        raise ValueError(f"Invalid log level: {level}. Must be one of {valid_levels}")
+    if file_level_upper not in valid_levels:
+        raise ValueError(f"Invalid file log level: {file_level}. Must be one of {valid_levels}")
+    
+    numeric_level = getattr(logging, level_upper)
+    numeric_file_level = getattr(logging, file_level_upper)
     
     # Get root logger
     root_logger = logging.getLogger()
